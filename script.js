@@ -17,7 +17,7 @@ async function generateZenKoan(theme) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": "Bearer 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" // Include the API key in the Authorization header (use your own key)
+      "Authorization": "Bearer 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" // Include the API key in the Authorization header (use your own key)
     },
     body: JSON.stringify({
       messages: [message],
