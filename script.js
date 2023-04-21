@@ -13,31 +13,20 @@ async function generateZenKoan(theme) {
     "content": `write me a 10-word zen koan about "${theme}":`
   };
 
-  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+const response = await fetch("https://us-central1-zenkoanproj2.cloudfunctions.net/ZENKOANFUNC2", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer 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" // Include the API key in the Authorization header (use your own key)
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      messages: [message],
-      max_tokens: 50,
-      n: 1,
-      stop: null,
-      temperature: 0.8,
-      model: "gpt-3.5-turbo"
-    }),
+      theme: theme
+    })
   });
 
+
   if (response.ok) {
-    const data = await response.json();
-    const message = data.choices[0].message;
-    if (message && message.content) {
-      const koan = message.content.trim().split('\n')[0];
-      result.textContent = `Generated Zen Koan: "${koan}"`;
-    } else {
-      result.textContent = "An error occurred. Please try again.";
-    }
+    const koan = await response.text();
+    result.textContent = `Generated Zen Koan: "${koan}"`;
   } else {
     result.textContent = "An error occurred. Please try again.";
   }
