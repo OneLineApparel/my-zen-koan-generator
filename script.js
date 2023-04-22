@@ -8,12 +8,7 @@ form.addEventListener("submit", (event) => {
 });
 
 async function generateZenKoan(theme) {
-  const message = {
-    "role": "system",
-    "content": `write me a 10-word zen koan about "${theme}":`
-  };
-
-const response = await fetch("https://us-central1-zenkoanproj2.cloudfunctions.net/ZENKOANFUNC2", {
+  const response = await fetch("https://us-central1-zenkoanproj2.cloudfunctions.net/ZENKOANFUNC2", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -22,7 +17,6 @@ const response = await fetch("https://us-central1-zenkoanproj2.cloudfunctions.ne
       theme: theme
     })
   });
-
 
   if (response.ok) {
     const koan = await response.text();
