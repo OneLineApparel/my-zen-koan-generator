@@ -14,7 +14,7 @@ async function generateZenKoan(theme) {
   };
   
   const token = "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";
-  const url = "https://api.github.com/repos/OneLineApparel/my-zen-koan-generator/secrets/actions/ZENKEYGIT";
+  const url = "https://api.github.com/repos/OneLineApparel/my-zen-koan-generator/actions/secrets/ZENKEYGIT";
   let secret = ""
   
   fetch(url, {
