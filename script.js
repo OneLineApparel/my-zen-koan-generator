@@ -13,7 +13,7 @@ async function generateZenKoan(theme) {
     "content": `write me a 10-word zen koan about "${theme}":`
   };
   
-  const token = "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";
+  const token = "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";
   const url = "https://api.github.com/repos/OneLineApparel/my-zen-koan-generator/actions/secrets/ZENKEYGIT";
   let secret = ""
   
