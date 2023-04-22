@@ -12,12 +12,39 @@ async function generateZenKoan(theme) {
     "role": "system",
     "content": `write me a 10-word zen koan about "${theme}":`
   };
+  
+  const token = "MATAN PUT YOUR API KEY HERE";
+  const url = "https://api.github.com/repos/OneLineApparel/my-zen-koan-generator/actions/secrets/ZENKEYGIT";
+  let secret = ""
+  
+  fetch(url, {
+    method: "GET",
+    headers: {
+      "Accept": "application/vnd.github+json",
+      "Authorization": `Bearer ${token}`,
+      "X-GitHub-Api-Version": "2022-11-28"
+    }
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log(data);
+    // I think the secret should be on data but am confused about the details
+    secret = data["secret"]
+  })
+  .catch(error => {
+    console.error("There was a problem with the fetch operation:", error);
+  });
 
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": "Bearer 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" // Include the API key in the Authorization header (use your own key)
+      "Authorization": `Bearer ${secret}` // Include the API key in the Authorization header (use your own key)
     },
     body: JSON.stringify({
       messages: [message],
